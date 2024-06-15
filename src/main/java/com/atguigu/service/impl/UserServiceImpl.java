@@ -103,6 +103,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return Result.ok(data);
     }
 
+    @Override
+    public Result<Object> checkUsrName(String username)
+    {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getUsername, username);
+        Long count = userMapper.selectCount(lambdaQueryWrapper);
+        if (count == 0)
+        {
+            return Result.ok(null);
+        }
+        return Result.build(null, ResultCodeEnum.USERNAME_USED);
+    }
+
+    @Override
+    public Result<Object> registry(User user)
+    {
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getUsername, user.getUsername());
+        Long count = userMapper.selectCount(lambdaQueryWrapper);
+        if (count > 0)
+        {
+            return Result.build(null, ResultCodeEnum.USERNAME_USED);
+        }
+
+        user.setUserPwd(MD5Util.encrypt(user.getUserPwd()));
+        userMapper.insert(user);
+        return Result.ok(null);
+    }
+
 
 }
 

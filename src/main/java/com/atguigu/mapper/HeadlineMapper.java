@@ -1,7 +1,12 @@
 package com.atguigu.mapper;
 
 import com.atguigu.pojo.Headline;
+import com.atguigu.pojo.PortalVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 /**
 * @author qinshixin
@@ -11,6 +16,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface HeadlineMapper extends BaseMapper<Headline> {
 
+    IPage<Map<String, String>> selectMyPage (IPage<Map<String, String>> page,
+                                             @Param("portalVo") PortalVo portalVo);
+
+    Map queryDetailMap(@Param("hid") Integer hid);
 }
 
 

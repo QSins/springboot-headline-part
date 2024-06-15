@@ -27,4 +27,20 @@ public interface UserService extends IService<User> {
      * @return
      */
     Result<Map<String, User>> getUserInfo(String token);
+
+    /**
+     * 检查账号名称是否可用
+     *
+     * @param username
+     * @return
+     */
+    Result<Object> checkUsrName(String username);
+
+    /**
+     * 注册业务
+     *
+     * @param user
+     * @return
+     */
+    Result<Object> registry(User user);
 }

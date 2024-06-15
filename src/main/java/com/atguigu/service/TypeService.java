@@ -1,7 +1,10 @@
 package com.atguigu.service;
 
 import com.atguigu.pojo.Type;
+import com.atguigu.utils.Result;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author qinshixin
@@ -10,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface TypeService extends IService<Type> {
 
+    /**
+     * 查询所有类别数据
+     *
+     * @return
+     */
+    Result<List<Type>> findAllTypes();
 }

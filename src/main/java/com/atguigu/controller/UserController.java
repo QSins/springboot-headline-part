@@ -27,7 +27,8 @@ public class UserController
     UserService userService;
 
     @PostMapping("/login")
-    public Result<Map<String, String>>  login(@RequestBody User user) {
+    public Result<Map<String, String>> login(@RequestBody User user)
+    {
         return userService.login(user);
     }
 
@@ -35,5 +36,17 @@ public class UserController
     public Result<Map<String, User>> getUserInfo(@RequestHeader String token)
     {
         return userService.getUserInfo(token);
+    }
+
+    @PostMapping("/checkUserName")
+    public Result<Object> checkUserName(@RequestParam String username)
+    {
+        return userService.checkUsrName(username);
+    }
+
+    @PostMapping("/registry")
+    public Result<Object> registry(@RequestBody User user)
+    {
+        return userService.registry(user);
     }
 }
